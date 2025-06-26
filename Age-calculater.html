@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Age Calculator: Calculate exact age in years, months, days. Track birthdays & life duration. SEO-optimized tool for accurate age results." />
+  <meta name="keywords" content="age calculator, exact age, age in years, birthday calculator, age finder online" />
+  <meta name="author" content="YourName" />
+  <title>Age Calculator - Find Your Exact Age</title>
+
+  <!-- AdSense (Replace with your ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #007bff;
+    }
+    .container {
+      max-width: 600px;
+      background: #fff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    input[type="date"], button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .result {
+      margin-top: 20px;
+      background: #e9f7ef;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .ad-box {
+      margin: 20px 0;
+      background: #f1f1f1;
+      text-align: center;
+      padding: 10px;
+      border: 1px dashed #ccc;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Age Calculator</h1>
+    <p>Enter your date of birth to calculate your exact age, time till next birthday, and total days lived.</p>
+
+    <input type="date" id="dob" max="{{today}}" />
+    <button onclick="calculateAge()">Calculate Age</button>
+
+    <!-- Ad 1 -->
+    <div class="ad-box">
+      <!-- Replace below with your AdSense code -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <!-- Ad 2 -->
+    <div class="ad-box">
+      <!-- Replace below with your AdSense code -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const dob = new Date(document.getElementById("dob").value);
+      if (!dob.getTime()) return alert("Please enter a valid date.");
+
+      const today = new Date();
+      let ageY = today.getFullYear() - dob.getFullYear();
+      let ageM = today.getMonth() - dob.getMonth();
+      let ageD = today.getDate() - dob.getDate();
+
+      if (ageD < 0) {
+        ageM--;
+        ageD += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      if (ageM < 0) {
+        ageY--;
+        ageM += 12;
+      }
+
+      // Next birthday
+      const nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+      if (today > nextBday) nextBday.setFullYear(today.getFullYear() + 1);
+      const diff = Math.floor((nextBday - today) / (1000 * 60 * 60 * 24));
+
+      // Days lived
+      const daysLived = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
+
+      document.getElementById("result").innerHTML = `
+        <h2>Your Age Details</h2>
+        <p><strong>Years:</strong> ${ageY}, <strong>Months:</strong> ${ageM}, <strong>Days:</strong> ${ageD}</p>
+        <p><strong>Days Left Until Next Birthday:</strong> ${diff}</p>
+        <p><strong>Total Days Lived:</strong> ${daysLived}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
