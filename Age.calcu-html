@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Age Calculator: Calculate exact age in years, months, days. Track birthdays & life duration. SEO-optimized tool with ad support." />
+  <meta name="keywords" content="age calculator, exact age, birthday tracker, date of birth calculator" />
+  <meta name="author" content="YourSiteName" />
+  <title>Age Calculator - Accurate & Instant</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #f0f4ff, #ffffff);
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 40px 30px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+      font-size: 2.6em;
+      margin-bottom: 15px;
+      animation: slideIn 0.8s ease;
+    }
+
+    p.description {
+      text-align: center;
+      font-size: 1.1em;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    input[type="date"], button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    input[type="date"] {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      background: #e8f9f0;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    .ad-space {
+      background: #f1f1f1;
+      text-align: center;
+      padding: 15px;
+      margin: 25px 0;
+      border-radius: 12px;
+      border: 1px dashed #ccc;
+      animation: bounceIn 0.7s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideIn {
+      from {transform: translateY(-30px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    @keyframes bounceIn {
+      0% {transform: scale(0.95);}
+      50% {transform: scale(1.05);}
+      100% {transform: scale(1);}
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Age Calculator</h1>
+    <p class="description">Enter your date of birth to calculate your age, time until next birthday, and days you've lived.</p>
+
+    <input type="date" id="dob" />
+    <button onclick="calculateAge()">Calculate Age</button>
+
+    <div class="ad-space">
+      <!-- Google AdSense (Replace with your actual values) -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <div class="ad-space">
+      <!-- Optional second Ad -->
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const dob = new Date(document.getElementById("dob").value);
+      const today = new Date();
+
+      if (!dob.getTime()) {
+        document.getElementById("result").innerHTML = "<p>Please enter a valid date.</p>";
+        return;
+      }
+
+      let ageY = today.getFullYear() - dob.getFullYear();
+      let ageM = today.getMonth() - dob.getMonth();
+      let ageD = today.getDate() - dob.getDate();
+
+      if (ageD < 0) {
+        ageM--;
+        ageD += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+
+      if (ageM < 0) {
+        ageY--;
+        ageM += 12;
+      }
+
+      const nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+      if (today > nextBday) nextBday.setFullYear(today.getFullYear() + 1);
+      const daysLeft = Math.floor((nextBday - today) / (1000 * 60 * 60 * 24));
+      const daysLived = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
+
+      document.getElementById("result").innerHTML = `
+        <p><strong>Your Age:</strong> ${ageY} Years, ${ageM} Months, ${ageD} Days</p>
+        <p><strong>Days Until Next Birthday:</strong> ${daysLeft} day(s)</p>
+        <p><strong>Total Days Lived:</strong> ${daysLived} day(s)</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
