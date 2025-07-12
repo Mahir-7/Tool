@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free Age Calculator: Calculate exact age in years, months, and days. Fast, SEO-optimized online DOB to age calculator." />
+  <meta name="keywords" content="age calculator, calculate my age, birthday calculator, dob to age, how old am I" />
+  <meta name="author" content="Mahir" />
+  <title>Age Calculator - Exact Age by DOB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #f0f4ff, #ffffff);
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 35px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+      animation: slideIn 1s ease;
+    }
+    p.description {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #555;
+      font-size: 1.1em;
+    }
+    input[type="date"], button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover { background: #0056b3; }
+    .result {
+      background: #e8f9f0;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      animation: fadeIn 0.8s ease;
+    }
+    .ad-space {
+      margin: 25px 0;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f1f1f1;
+      text-align: center;
+      border: 1px dashed #ccc;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;} to {opacity: 1;}
+    }
+    @keyframes slideIn {
+      from {transform: translateY(-30px); opacity: 0;} to {transform: translateY(0); opacity: 1;}
+    }
+    @media (max-width: 600px) {
+      .container { padding: 25px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Age Calculator</h1>
+    <p class="description">Enter your date of birth and get your exact age in years, months, and days. You’ll also see total days lived and next birthday countdown.</p>
+
+    <input type="date" id="dob" />
+    <button onclick="calculateAge()">Calculate Age</button>
+
+    <div class="ad-space">
+      <!-- Google AdSense (Replace with your ad code) -->
+      <p>Ad Space</p>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <div class="ad-space">
+      <!-- Optional second ad -->
+      <p>Ad Space</p>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const dob = new Date(document.getElementById("dob").value);
+      const today = new Date();
+
+      if (!dob.getTime()) {
+        document.getElementById("result").innerHTML = "<p>Please enter a valid date.</p>";
+        return;
+      }
+
+      let ageY = today.getFullYear() - dob.getFullYear();
+      let ageM = today.getMonth() - dob.getMonth();
+      let ageD = today.getDate() - dob.getDate();
+
+      if (ageD < 0) {
+        ageM--;
+        ageD += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      if (ageM < 0) {
+        ageY--;
+        ageM += 12;
+      }
+
+      const nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+      if (today > nextBday) nextBday.setFullYear(today.getFullYear() + 1);
+      const daysLeft = Math.floor((nextBday - today) / (1000 * 60 * 60 * 24));
+      const daysLived = Math.floor((today - dob) / (1000 * 60 * 60 * 24));
+
+      document.getElementById("result").innerHTML = `
+        <p><strong>Your Age:</strong> ${ageY} Years, ${ageM} Months, ${ageD} Days</p>
+        <p><strong>Days Until Next Birthday:</strong> ${daysLeft} day(s)</p>
+        <p><strong>Total Days Lived:</strong> ${daysLived} day(s)</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
